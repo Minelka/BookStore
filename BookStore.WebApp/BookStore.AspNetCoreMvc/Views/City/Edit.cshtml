@@ -1,17 +1,18 @@
 ﻿@model CityViewModel
+
 <div class="card">
     <div class="card-header">
         YENİ
     </div>
     <div class="card-body">
-        <form class="row g-3" asp-controller="City">
+        <form class="row g-3" asp-controller="City" asp-action="Update">
             <div class="col-md-12">
                 <label asp-for="Name" class="form-label">Adı</label>
                 <input asp-for="Name" class="form-control" />
             </div>
             <div class="col-12">
                 <div class="form-check">
-                    <input asp-for="Status" class="form-check-input"  value="true">
+                    <input asp-for="Status" class="form-check-input" value="true">
                     <label class="form-check-label" asp-for="Status">
                         Aktif
                     </label>
@@ -19,6 +20,7 @@
             </div>
             <div class="col-12">
                 <input type="submit" class="btn btn-success" value="Kaydet" />
+                <input type="hidden" asp-for="Id" />
             </div>
         </form>
     </div>
@@ -26,5 +28,3 @@
         <span class="badge text-info">@DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")</span>
     </div>
 </div>
-
-

@@ -1,22 +1,58 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<CityViewModel>
 @{
+    int i = 1;
 }
-<a class="btn btn-success" role="button" asp-controller="City" asp-action="New">Yeni</a>
-
+<a class="btn btn-success" role="button" asp-controller="City" asp-action="Add">Yeni</a>
+<a asp-route-status="aktif">Aktif</a>
+<a asp-route-status="pasif">Pasif</a>
+<a asp-route-status="">Hepsi</a>
 <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Adı</th>
+            <th scope="col">
+                <a asp-route-orderType="Asc" asp-route-orderColumn="Name">
+                    <i style="background-image:url('images/chevron-arrow-down.png');display: inline-block; width: 24px; height: 24px; box-sizing: border-box; margin: 5px;"></i>
+                </a>
+
+                Adı
+                
+                <a asp-route-orderType="Desc" asp-route-orderColumn="Name">
+                    <i style="background-image:url('images/chevron-arrow-up.png');display: inline-block; width: 24px; height: 24px; box-sizing: border-box; margin: 5px;"></i>
+                </a>
+                Adı
+                
+            </th>
             <th scope="col">Durumu</th>
+            <th scope="col">İşlemler</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td colspan="3"></td>
-            <p class="text-muted text-center"> Liste boş</p>
-        </tr>
+        @if (Model.Any())
+        {
+            @foreach (CityViewModel city in Model)
+            {
+                <tr>
+                    <td>@(i++)</td>
+                    <td>@city.Name</td>
+                    <td>@city.Status</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Şehir işlemleri Düzenle, Detay ve Sil">
+                            <a asp-controller="City" asp-action="Edit" asp-route-id="@city.Id" role="button" class="btn btn-warning" aria-label="Şehir Düzenle">Düzenle</a>
+                            <a asp-controller="City" asp-action="Detail" asp-route-id="@city.Id" role="button" class="btn btn-secondary" aria-label="Şehir Detayı">Detay</a>
+                            <a asp-controller="City" asp-action="Remove" asp-route-id="@city.Id" role="button" class="btn btn-danger" aria-label="Şehir Sil">Sil</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">
+                    <p class="text-muted text-center">Liste boş</p>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -1,0 +1,75 @@
+﻿@model CityViewModel
+@{
+    var model = Model;
+}
+<div class="card">
+    <div class="card-header">
+        YENİ
+    </div>
+    <div class="card-body">
+        <form class="row g-3" asp-controller="City" asp-action="Add">
+            <div class="col-md-12">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger" id="validate-name"></span>
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input asp-for="Status" class="form-check-input" value="true">
+                    <label class="form-check-label" asp-for="Status">
+                    </label>
+                </div>
+            </div>
+            <div class="col-12">
+                <input type="submit" class="btn btn-success" value="Kaydet" />
+            </div>
+        </form>
+    </div>
+    <div class="card-footer text-body-secondary">
+        <span class="badge text-info">@DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")</span>
+    </div>
+</div>
+
+//Client side işlemler
+@section Scripts
+{
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+@*     <script type="text/javascript">
+
+        console.log($("#Name").val());
+
+        function OnSubmit() {
+            //Javascript Validation 1. YÖNTEM
+            // var name = document.getElementById("Name").value;
+            // var message = document.getElementById("Name").getAttribute("data-val-required");
+
+            // if (name == "")
+            // {
+            //     documet.GetElementById("validate-name").innerText = message;
+            //     return false;
+            // }
+
+            // alert(name);
+            // return true;
+
+            //Jqery 2. YÖNETM
+            var name = $("#Name").val();
+            var message = $("#Name").data("val-required");
+
+            if (name == "") {
+                // document.getElementById("validate-Name").innerText = message;
+                $("#validate-Name").text(message);
+
+                // document.getElementById("validate-Name").innerHTML = message;
+                // $("#validate-Name").html(message);
+
+
+                return false;
+            }
+            return true;
+        }
+
+    </script> *@
+}
